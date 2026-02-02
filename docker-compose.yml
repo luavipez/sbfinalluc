@@ -6,19 +6,20 @@ services:
     depends_on:
           - db
     environment:
-
-      - SPRING_DATASOURCE_URL=jdbc:mysql://db:3306/sbluc
+      - SPRING_DATASOURCE_URL=jdbc:mysql://db:3306/sbluc?createDatabaseIfNotExist=true&serverTimezone=UTC
       - SPRING_DATASOURCE_USERNAME=root
-      - SPRING_DATASOURCE_PASSWORD=""
+      - SPRING_DATASOURCE_PASSWORD=
 
   db:
     image: mysql:8.0
     ports:
       - "3306:3306"
     environment:
+      MYSQL_ALLOW_EMPTY_PASSWORD: 'yes'
       MYSQL_DATABASE: sbluc
-      MYSQL_USER: root
-      MYSQL_-ROOT_PASSWORD: ""
+      #MYSQL_USER: root
+        #- MYSQL_ALLOW_EMPTY_PASSWORD
+      #MYSQL_PASSWORD: ""
     volumes:
       - db-data:/var/lib/mysql
 
